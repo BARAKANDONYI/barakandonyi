@@ -10,12 +10,13 @@
     }
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #fff;
-      color: #333;
+      background-color: #f2f4f7;
+      color: #333333;
       line-height: 1.6;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      transition: background-color 0.3s, color 0.3s;
     }
     body.dark-mode {
       background-color: #121212;
@@ -23,70 +24,116 @@
     }
     main {
       max-width: 700px;
-      margin: 2rem auto;
+      margin: 3rem auto;
       padding: 0 1rem;
       flex-grow: 1;
     }
     h1 {
       text-align: center;
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: #2c3e50;
+      font-size: 2.8rem;
+      margin-bottom: 1.5rem;
+      color: #003366;
     }
     form {
-      background: #f9f9f9;
-      padding: 2rem;
+      background: #fff;
+      padding: 2.5rem 3rem;
       border-radius: 12px;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s;
     }
     body.dark-mode form {
       background-color: #1e1e1e;
     }
     label {
       display: block;
-      margin-top: 1rem;
+      margin-top: 1.3rem;
       font-weight: 600;
-      color: #34495e;
+      color: #003366;
     }
     input[type="text"],
     input[type="email"],
-    textarea {
+    textarea,
+    select {
       width: 100%;
-      padding: 0.7rem;
-      margin-top: 0.3rem;
+      padding: 0.8rem;
+      margin-top: 0.4rem;
       border: 2px solid #ccc;
       border-radius: 8px;
       font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    textarea:focus,
+    select:focus {
+      border-color: #f4b41a;
+      outline: none;
+    }
+    .phone-group {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.3rem;
+    }
+    select {
+      max-width: 30%;
+      cursor: pointer;
     }
     textarea {
       min-height: 100px;
+      resize: vertical;
     }
     input[type="radio"],
     input[type="checkbox"] {
-      margin-right: 0.5rem;
-      margin-top: 0.8rem;
+      margin-right: 0.6rem;
+      margin-top: 0.9rem;
+      cursor: pointer;
     }
     .options-group {
-      margin-top: 0.5rem;
+      margin-top: 0.6rem;
       margin-bottom: 1rem;
+      color: #003366;
+      font-weight: 500;
+    }
+    .options-group label {
+      cursor: pointer;
+    }
+    small {
+      color: #666666;
+      font-size: 0.85rem;
+      display: block;
+      margin-top: 0.2rem;
     }
     button[type="submit"] {
       display: block;
       width: 100%;
-      margin-top: 1.5rem;
-      padding: 0.75rem;
-      font-size: 1.1rem;
-      background-color: #3498db;
+      margin-top: 2rem;
+      padding: 0.85rem;
+      font-size: 1.15rem;
+      background-color: #003366;
       color: white;
       border: none;
       border-radius: 8px;
       cursor: pointer;
+      transition: background-color 0.3s ease;
     }
     button[type="submit"]:hover {
-      background-color: #2980b9;
+      background-color: #002244;
+    }
+    .back-project {
+      display: block;
+      text-align: center;
+      margin-top: 2rem;
+      color: #003366;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .back-project:hover {
+      text-decoration: underline;
+      color: #f4b41a;
     }
     .theme-switch-wrapper {
-      margin-top: 2rem;
+      margin-top: 3rem;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -101,6 +148,7 @@
       opacity: 0;
       width: 0;
       height: 0;
+      cursor: pointer;
     }
     .slider {
       position: absolute;
@@ -122,64 +170,25 @@
       transition: 0.4s;
     }
     input:checked + .slider {
-      background-color: #3498db;
+      background-color: #003366;
     }
     input:checked + .slider:before {
       transform: translateX(26px);
     }
-    .back-home {
-      display: block;
-      text-align: center;
-      margin-top: 1.5rem;
-      color: #3498db;
-      font-weight: 600;
-      text-decoration: none;
-    }
-    .back-home:hover {
-      text-decoration: underline;
-      color: #1d6fa5;
-    }
     footer {
       text-align: center;
       padding: 1rem 0;
-      background-color: #2c3e50;
+      background-color: #003366;
       color: #ecf0f1;
       margin-top: auto;
     }
   </style>
-  <script>
-    function toggleTheme(e) {
-      document.body.classList.toggle("dark-mode", e.target.checked);
-    }
-
-    function validateForm() {
-      const email = document.getElementById("email").value.trim();
-      const phone = document.getElementById("phone").value.trim();
-      const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,}$/i;
-      const phoneDigits = phone.replace(/[^\d]/g, '');
-      const phonePattern = /^\+?[\d\s\-().]{7,20}$/;
-
-      if (!emailPattern.test(email)) {
-        alert("Please enter a valid email.");
-        return false;
-      }
-      if (!phonePattern.test(phone) || phoneDigits.length < 7 || phoneDigits.length > 15) {
-        alert("Please enter a valid phone number.");
-        return false;
-      }
-      return true;
-    }
-
-    window.addEventListener("DOMContentLoaded", () => {
-      document.getElementById("themeToggle").addEventListener("change", toggleTheme);
-    });
-  </script>
 </head>
 <body>
 
 <main>
   <h1>Survey | Baraka Ogongi Ndonyi</h1>
-  <form onsubmit="return validateForm();">
+  <form id="surveyForm">
     <label for="name">Full Name:</label>
     <input type="text" id="name" name="name" required placeholder="Your full name" />
 
@@ -187,8 +196,18 @@
     <input type="email" id="email" name="email" required placeholder="example@domain.com" />
 
     <label for="phone">Phone Number:</label>
-    <input type="text" id="phone" name="phone" placeholder="+1 234 567 8900" required />
-    <small style="color: #666; font-size: 0.85rem;">Format: +CountryCode Number</small>
+    <div class="phone-group">
+      <select id="countryCode" required>
+        <option value="+254">🇰🇪 +254 (Kenya)</option>
+        <option value="+255">🇹🇿 +255 (Tanzania)</option>
+        <option value="+256">🇺🇬 +256 (Uganda)</option>
+        <option value="+250">🇷🇼 +250 (Rwanda)</option>
+        <option value="+1">🇺🇸 +1 (USA)</option>
+        <option value="+44">🇬🇧 +44 (UK)</option>
+      </select>
+      <input type="text" id="phone" name="phone" placeholder="712345678" required />
+    </div>
+    <small>Select your country and enter the phone number without country code.</small>
 
     <label>What is your gender?</label>
     <div class="options-group">
@@ -216,7 +235,7 @@
     <button type="submit">Submit</button>
   </form>
 
-  <a href="index.html" class="back-home">← Back to Home</a>
+  <a href="projects.html" class="back-project">← Back to Projects</a>
 
   <div class="theme-switch-wrapper">
     <label class="theme-switch">
@@ -230,6 +249,42 @@
 <footer>
   <p>© 2025 Baraka Ogongi Ndonyi. All rights reserved.</p>
 </footer>
+
+<script>
+  function toggleTheme(e) {
+    document.body.classList.toggle("dark-mode", e.target.checked);
+  }
+
+  function validateForm(event) {
+    event.preventDefault();
+
+    const email = document.getElementById("email").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const code = document.getElementById("countryCode").value;
+    const fullPhone = code + phone;
+    const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,}$/i;
+    const phonePattern = /^\+?[0-9]{7,15}$/;
+
+    if (!emailPattern.test(email)) {
+      alert("Please enter a valid email.");
+      return false;
+    }
+    if (!phonePattern.test(fullPhone)) {
+      alert("Please enter a valid phone number with the selected country code.");
+      return false;
+    }
+
+    // Success
+    alert("Submission successful!\nPhone: " + fullPhone);
+    document.getElementById("surveyForm").reset();
+    return true;
+  }
+
+  window.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("themeToggle").addEventListener("change", toggleTheme);
+    document.getElementById("surveyForm").addEventListener("submit", validateForm);
+  });
+</script>
 
 </body>
 </html>

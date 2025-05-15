@@ -3,110 +3,137 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Baraka Ogongi Ndonyi" />
   <title>Healthcare AI Chat Tool</title>
+
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f0f4f8;
+    * {
       margin: 0;
       padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      height: 100vh;
+      box-sizing: border-box;
     }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9fcff;
+      color: #333;
+    }
+
     header {
       background-color: #0077b6;
-      color: white;
-      width: 100%;
-      padding: 1rem;
+      color: #ffffff;
       text-align: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 1.5rem 1rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
+
+    header h1 {
+      font-size: 1.8rem;
+    }
+
+    header p {
+      font-size: 1rem;
+      margin-top: 0.4rem;
+    }
+
     main {
-      width: 100%;
-      max-width: 600px;
-      background: white;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
-      margin: 2rem 0;
-      border-radius: 10px;
+      width: 90%;
+      max-width: 700px;
+      margin: 2rem auto;
+      background: #ffffff;
+      border: 2px solid #cce5f7;
+      border-radius: 16px;
       display: flex;
       flex-direction: column;
       height: 70vh;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
     }
+
     .chat-window {
-      padding: 1rem;
       flex-grow: 1;
       overflow-y: auto;
+      padding: 1rem;
+      border-bottom: 1px solid #cce5f7;
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      border-bottom: 1px solid #ddd;
+      gap: 14px;
+      scroll-behavior: smooth;
     }
+
     .message {
-      padding: 12px 16px;
+      padding: 0.9rem 1.2rem;
       border-radius: 20px;
-      max-width: 75%;
       font-size: 1rem;
-      line-height: 1.3;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-      user-select: none;
+      max-width: 80%;
+      line-height: 1.5;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
     }
+
     .user {
-      background: #caf0f8;
+      background-color: #caf0f8;
       align-self: flex-end;
-      border-bottom-right-radius: 2px;
+      border-bottom-right-radius: 6px;
     }
+
     .bot {
-      background: #e0e0e0;
+      background-color: #eaf4f8;
       align-self: flex-start;
-      border-bottom-left-radius: 2px;
+      border-bottom-left-radius: 6px;
     }
+
     form {
       display: flex;
-      padding: 15px;
-      background: #fafafa;
-      border-radius: 0 0 10px 10px;
+      padding: 1rem;
+      background-color: #ffffff;
+      border-radius: 0 0 16px 16px;
     }
+
     input[type="text"] {
       flex-grow: 1;
-      padding: 12px 20px;
-      border: 1px solid #ccc;
-      border-radius: 20px;
+      padding: 0.8rem 1rem;
+      border: 2px solid #90e0ef;
+      border-radius: 30px;
       font-size: 1rem;
-      outline-offset: 2px;
+      outline: none;
+      transition: all 0.2s ease;
     }
+
     input[type="text"]:focus {
       border-color: #0077b6;
-      box-shadow: 0 0 5px #0077b6;
+      box-shadow: 0 0 8px rgba(0, 119, 182, 0.3);
     }
+
     button {
-      margin-left: 12px;
-      padding: 12px 20px;
+      margin-left: 10px;
+      padding: 0.8rem 1.5rem;
       border: none;
-      border-radius: 20px;
-      background: #0077b6;
+      border-radius: 30px;
+      background-color: #00b4d8;
       color: white;
       font-size: 1rem;
+      font-weight: bold;
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: background-color 0.3s ease;
     }
+
     button:hover {
-      background: #023e8a;
-    }
-    /* Scrollbar for chat window */
-    .chat-window::-webkit-scrollbar {
-      width: 8px;
-    }
-    .chat-window::-webkit-scrollbar-thumb {
       background-color: #0077b6;
-      border-radius: 4px;
     }
-    /* Back to project button container */
+
+    .chat-window::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .chat-window::-webkit-scrollbar-thumb {
+      background-color: #00b4d8;
+      border-radius: 3px;
+    }
+
     .back-button-container {
       text-align: center;
-      margin-bottom: 2rem;
+      margin: 2rem 0;
     }
+
     .back-button {
       background: #48cae4;
       color: #023e8a;
@@ -114,119 +141,137 @@
       padding: 12px 30px;
       border-radius: 30px;
       border: 2px solid #023e8a;
-      cursor: pointer;
-      font-size: 1rem;
       text-decoration: none;
+      font-size: 1rem;
       display: inline-block;
       transition: background 0.3s ease, color 0.3s ease;
     }
+
     .back-button:hover {
       background: #023e8a;
       color: #48cae4;
       border-color: #48cae4;
     }
+
+    @media (max-width: 600px) {
+      main {
+        height: auto;
+        margin: 1rem;
+      }
+
+      .message {
+        font-size: 0.95rem;
+      }
+
+      input[type="text"],
+      button {
+        font-size: 0.9rem;
+      }
+
+      header h1 {
+        font-size: 1.5rem;
+      }
+
+      header p {
+        font-size: 0.9rem;
+      }
+    }
   </style>
 </head>
 <body>
 
-<header>
-  <h1>Healthcare AI Chat Tool</h1>
-  <p>Improving communication between providers and patients</p>
-</header>
+  <header>
+    <h1>Healthcare AI Chat Tool</h1>
+    <p>Improving communication between providers and patients</p>
+  </header>
 
-<main>
-  <div class="chat-window" id="chat-window">
-    <div class="message bot">Hello! I’m your healthcare assistant. How can I help you today?</div>
+  <main>
+    <div class="chat-window" id="chat-window">
+      <div class="message bot">Hello! I’m your healthcare assistant. How can I help you today?</div>
+    </div>
+
+    <form id="chat-form">
+      <input type="text" id="user-input" placeholder="Type your message..." required autocomplete="off" />
+      <button type="submit">Send</button>
+    </form>
+  </main>
+
+  <div class="back-button-container">
+    <a href="projects.html" class="back-button" title="Back to Project">← Back to Project</a>
   </div>
 
-  <form id="chat-form">
-    <input type="text" id="user-input" placeholder="Type your message..." required autocomplete="off" />
-    <button type="submit">Send</button>
-  </form>
-</main>
+  <script>
+    const chatWindow = document.getElementById("chat-window");
+    const chatForm = document.getElementById("chat-form");
+    const userInput = document.getElementById("user-input");
 
-<!-- Back to project button below main -->
-<div class="back-button-container">
-  <!-- Change the href to your actual project page URL -->
-  <a href="C:\Users\D3im0s\OneDrive\Desktop\BARAKAPORTIFOLIO\projects.html" class="back-button" title="Back to Project">← Back to Project</a>
-</div>
+    const responses = [
+      {
+        keywords: ["hello", "hi", "hey", "good morning", "good afternoon"],
+        reply: "Hi there! How can I assist you with your health today?"
+      },
+      {
+        keywords: ["fever", "temperature", "hot", "cold"],
+        reply: "I'm sorry to hear you have a fever. It's important to stay hydrated and rest. If your temperature is above 38°C (100.4°F) or lasts more than 3 days, please consider seeing a healthcare provider."
+      },
+      {
+        keywords: ["headache", "migraine", "pain"],
+        reply: "Headaches can have many causes. Make sure you stay hydrated and try to rest in a quiet, dark room. If your headache is severe or accompanied by other symptoms, please seek medical attention."
+      },
+      {
+        keywords: ["appointment", "schedule", "book"],
+        reply: "You can schedule an appointment by calling your healthcare provider or using their online booking system. Do you want me to guide you through the steps?"
+      },
+      {
+        keywords: ["symptom", "symptoms", "feel", "signs"],
+        reply: "Can you please describe your symptoms in detail? I'll do my best to provide helpful information."
+      },
+      {
+        keywords: ["thank you", "thanks", "thank"],
+        reply: "You're very welcome! Feel free to ask me anything else about your health."
+      },
+      {
+        keywords: ["bye", "goodbye", "see you", "talk later"],
+        reply: "Take care! Don't hesitate to chat again if you need any help."
+      }
+    ];
 
-<script>
-  const chatWindow = document.getElementById("chat-window");
-  const chatForm = document.getElementById("chat-form");
-  const userInput = document.getElementById("user-input");
-
-  const responses = [
-    {
-      keywords: ["hello", "hi", "hey", "good morning", "good afternoon"],
-      reply: "Hi there! How can I assist you with your health today?"
-    },
-    {
-      keywords: ["fever", "temperature", "hot", "cold"],
-      reply: "I'm sorry to hear you have a fever. It's important to stay hydrated and rest. If your temperature is above 38°C (100.4°F) or lasts more than 3 days, please consider seeing a healthcare provider."
-    },
-    {
-      keywords: ["headache", "migraine", "pain"],
-      reply: "Headaches can have many causes. Make sure you stay hydrated and try to rest in a quiet, dark room. If your headache is severe or accompanied by other symptoms, please seek medical attention."
-    },
-    {
-      keywords: ["appointment", "schedule", "book"],
-      reply: "You can schedule an appointment by calling your healthcare provider or using their online booking system. Do you want me to guide you through the steps?"
-    },
-    {
-      keywords: ["symptom", "symptoms", "feel", "signs"],
-      reply: "Can you please describe your symptoms in detail? I'll do my best to provide helpful information."
-    },
-    {
-      keywords: ["thank you", "thanks", "thank"],
-      reply: "You're very welcome! Feel free to ask me anything else about your health."
-    },
-    {
-      keywords: ["bye", "goodbye", "see you", "talk later"],
-      reply: "Take care! Don't hesitate to chat again if you need any help."
-    }
-  ];
-
-  function findResponse(message) {
-    const lower = message.toLowerCase();
-
-    for (const item of responses) {
-      for (const kw of item.keywords) {
-        if (lower.includes(kw)) {
-          return item.reply;
+    function findResponse(message) {
+      const lower = message.toLowerCase();
+      for (const item of responses) {
+        for (const kw of item.keywords) {
+          if (lower.includes(kw)) {
+            return item.reply;
+          }
         }
       }
+      return "Thanks for sharing. Could you please provide more details or specify your concern so I can help better?";
     }
 
-    return "Thanks for sharing. Could you please provide more details or specify your concern so I can help better?";
-  }
+    function addMessage(sender, text) {
+      const div = document.createElement("div");
+      div.className = `message ${sender}`;
+      div.textContent = text;
+      chatWindow.appendChild(div);
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+    }
 
-  function addMessage(sender, text) {
-    const div = document.createElement("div");
-    div.className = `message ${sender}`;
-    div.textContent = text;
-    chatWindow.appendChild(div);
-    chatWindow.scrollTop = chatWindow.scrollHeight;
-  }
+    chatForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const message = userInput.value.trim();
+      if (!message) return;
+      addMessage("user", message);
+      userInput.value = "";
 
-  chatForm.addEventListener("submit", function(e) {
-    e.preventDefault();
+      addMessage("bot", "Let me think...");
 
-    const message = userInput.value.trim();
-    if (!message) return;
-
-    addMessage("user", message);
-    userInput.value = "";
-
-    addMessage("bot", "Let me think...");
-
-    setTimeout(() => {
-      chatWindow.lastChild.remove();
-      const reply = findResponse(message);
-      addMessage("bot", reply);
-    }, 800);
-  });
-</script>
+      setTimeout(() => {
+        chatWindow.lastChild.remove();
+        const reply = findResponse(message);
+        addMessage("bot", reply);
+      }, 800);
+    });
+  </script>
 
 </body>
 </html>

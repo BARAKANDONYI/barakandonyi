@@ -2,9 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfolio of Baraka Ogongi Ndonyi" />
+  <meta name="keywords" content="HTML, CSS, JavaScript, Portfolio, Baraka Ogongi Ndonyi" />
   <meta name="author" content="Baraka Ogongi Ndonyi" />
-  <title>Contact | Baraka Ogongi Ndonyi</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home | Baraka Ogongi Ndonyi</title>
 
   <style>
     * {
@@ -15,10 +17,10 @@
 
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f2f4f7;
+      line-height: 1.6;
+      background-color: #f2f4f7; /* Light gray background */
       color: #333333;
       transition: background-color 0.3s, color 0.3s;
-      line-height: 1.6;
     }
 
     body.dark-mode {
@@ -27,16 +29,17 @@
     }
 
     header {
-      background-color: #003366;
+      background-color: #003366; /* Dark blue header */
+      color: #ffffff;
       padding: 1rem 0;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
     }
 
     nav ul {
       display: flex;
       justify-content: center;
       list-style: none;
-      gap: 30px;
+      gap: 30px; /* Space out nav items */
     }
 
     nav ul li a {
@@ -50,7 +53,7 @@
 
     nav ul li a:hover,
     nav ul li a.active {
-      border-bottom-color: #f4b41a;
+      border-bottom-color: #f4b41a; /* warm yellow underline on active/hover */
     }
 
     main {
@@ -63,44 +66,31 @@
       text-align: center;
     }
 
-    h1 {
+    .intro h1 {
       font-size: 2.8rem;
-      margin-bottom: 1.2rem;
+      margin-bottom: 0.8rem;
       color: #003366;
     }
 
-    p {
+    .intro p {
       font-size: 1.25rem;
-      margin-bottom: 1.2rem;
+      margin-bottom: 2rem;
       color: #555555;
     }
 
-    a {
-      color: #003366;
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.3s;
-    }
-
-    a:hover {
-      color: #f4b41a;
-      text-decoration: underline;
-    }
-
     button {
-      background-color: #003366;
+      background-color: #003366; /* dark blue button */
       color: white;
       border: none;
       padding: 0.75rem 1.5rem;
       font-size: 1.1rem;
       border-radius: 8px;
       cursor: pointer;
-      margin-top: 2rem;
       transition: background-color 0.3s ease;
     }
 
     button:hover {
-      background-color: #002244;
+      background-color: #002244; /* darker blue on hover */
     }
 
     footer {
@@ -111,7 +101,7 @@
       margin-top: 4rem;
     }
 
-    /* Responsive Nav */
+    /* Responsive Nav for smaller screens */
     @media (max-width: 600px) {
       nav ul {
         flex-direction: column;
@@ -121,30 +111,46 @@
   </style>
 
   <script>
+    function greetUser() {
+      const hour = new Date().getHours();
+      let greeting;
+
+      if (hour < 12) {
+        greeting = "Good morning";
+      } else if (hour < 18) {
+        greeting = "Good afternoon";
+      } else {
+        greeting = "Good evening";
+      }
+
+      alert(`${greeting}, and welcome to Baraka Ogongi Ndonyi's portfolio!`);
+    }
+
     function toggleTheme() {
       document.body.classList.toggle("dark-mode");
     }
   </script>
 </head>
-<body>
+
+<body onload="greetUser()">
   <header>
     <nav>
       <ul>
-        <li><a href="home.html">Home</a></li>
+        <li><a href="home.html" class="active">Home</a></li>
         <li><a href="about.html">About Me</a></li>
         <li><a href="projects.html">Projects</a></li>
-        <li><a href="contact.html" class="active">Contact</a></li>
+        <li><a href="contact.html">Contact</a></li>
         <li><a href="survey.html">Survey</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
-    <h1>Contact Me</h1>
-    <p>Email: <a href="mailto:barakanddonyi9@gmail.com">barakanddonyi9@gmail.com</a></p>
-    <p>Phone 1: <a href="tel:+225774596127">+225 77 45 96 127</a></p>
-    <p>Phone 2: <a href="tel:+225745446127">+225 74 54 46 127</a></p>
-    <button onclick="toggleTheme()">Toggle Dark/Light Mode</button>
+    <section class="intro">
+      <h1>Hello, I'm Baraka Ogongi Ndonyi</h1>
+      <p>I’m a creative and passionate web developer focused on building impactful, modern websites and applications.</p>
+      <button onclick="toggleTheme()">Toggle Dark/Light Mode</button>
+    </section>
   </main>
 
   <footer>
