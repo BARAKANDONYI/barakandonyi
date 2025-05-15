@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Church Record Management System</title>
+  <style>
+   
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f2f5;
+      color: #333;
+    }
+
+    /* Header */
+    header {
+      background-color: #003366;
+      color: #fff;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+    header h1 {
+      margin: 0;
+      font-weight: 700;
+      font-size: 1.8rem;
+    }
+
+ 
+    nav {
+      margin-top: 0.75rem;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      margin: 0 1rem;
+      padding-bottom: 0.25rem;
+      cursor: pointer;
+      transition: border-bottom 0.3s ease;
+      border-bottom: 3px solid transparent;
+      font-size: 1.1rem;
+    }
+    nav a:hover,
+    nav a.active {
+      border-bottom: 3px solid #f4b400;
+      color: #f4b400;
+    }
+
+  
+    main {
+      max-width: 900px;
+      margin: 2rem auto 4rem;
+      background: white;
+      padding: 2rem 2.5rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      min-height: 480px;
+      position: relative;
+      padding-bottom: 4rem; 
+    }
+
+    
+    section {
+      display: none;
+      animation: fadeIn 0.4s ease forwards;
+    }
+    section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+  
+    form {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 2rem;
+    }
+    form input, form textarea, form button {
+      margin: 0.5rem 0;
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      border: 1.5px solid #ccc;
+      border-radius: 6px;
+      transition: border-color 0.25s ease;
+      font-family: inherit;
+    }
+    form input:focus, form textarea:focus {
+      border-color: #003366;
+      outline: none;
+    }
+    form textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+    form button {
+      background-color: #003366;
+      color: white;
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+      margin-top: 1rem;
+    }
+    form button:hover {
+      background-color: #00509e;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      max-height: 280px;
+      overflow-y: auto;
+      border-top: 1px solid #ddd;
+    }
+    li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #e8efff;
+      margin: 0.4rem 0;
+      padding: 0.75rem 1rem;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+    li span.content {
+      flex-grow: 1;
+      margin-right: 1rem;
+      word-break: break-word;
+    }
+
+    
+    .event-item {
+      background: #fff8dc;
+      border-left: 6px solid #f4b400;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1rem;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(244, 180, 0, 0.15);
+    }
+    .event-item h3 {
+      margin: 0 0 0.3rem 0;
+      color: #665c00;
+      font-size: 1.3rem;
+      user-select: none;
+    }
+    .event-item p {
+      margin: 0.15rem 0;
+      color: #4a4a00;
+      font-size: 1rem;
+      user-select: none;
+    }
+
+  
+    .actions button {
+      background: transparent;
+      border: none;
+      color: #003366;
+      font-weight: 600;
+      cursor: pointer;
+      margin-left: 0.5rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      transition: background-color 0.2s ease;
+      font-size: 0.9rem;
+    }
+    .actions button:hover {
+      background-color: #cce0ff;
+    }
+
+    .return-home {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #003366;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 0.75rem 1.5rem;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: background-color 0.3s ease;
+      text-decoration: none;
+      z-index: 999;
+    }
+    .return-home:hover {
+      background-color: #00509e;
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Church Record Management System</h1>
+    <nav>
+      <a href="#" id="nav-members" class="active">Members</a>
+      <a href="#" id="nav-attendance">Attendance</a>
+      <a href="#" id="nav-events">Events</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <section id="members" class="active" aria-label="Member Registration">
+      <h2>Member Registration</h2>
+      <form id="memberForm" autocomplete="off" novalidate>
+        <input type="text" name="name" placeholder="Full Name" required aria-required="true" />
+        <input type="email" name="email" placeholder="Email" required aria-required="true" />
+        <input type="tel" name="phone" placeholder="Phone Number" required aria-required="true" />
+        <button type="submit" aria-label="Add Member">Add Member</button>
+      </form>
+      <ul id="memberList" aria-live="polite" aria-relevant="additions removals"></ul>
+    </section>
+
+    
+    <section id="attendance" aria-label="Attendance Tracking">
+      <h2>Attendance Tracking</h2>
+      <form id="attendanceForm" autocomplete="off" novalidate>
+        <input type="text" name="attendee" placeholder="Member Name" required aria-required="true" />
+        <input type="date" name="date" required aria-required="true" />
+        <button type="submit" aria-label="Mark Attendance">Mark Attendance</button>
+      </form>
+      <ul id="attendanceList" aria-live="polite" aria-relevant="additions removals"></ul>
+    </section>
+
+  
+    <section id="events" aria-label="Event Management">
+      <h2>Event Management</h2>
+      <form id="eventForm" autocomplete="off" novalidate>
+        <input type="text" name="title" placeholder="Event Title" required aria-required="true" />
+        <input type="date" name="eventDate" required aria-required="true" />
+        <textarea name="description" placeholder="Event Description" required aria-required="true"></textarea>
+        <button type="submit" aria-label="Add Event">Add Event</button>
+      </form>
+      <div id="eventList" aria-live="polite" aria-relevant="additions removals"></div>
+    </section>
+  </main>
+
+  <a href="index.html" class="return-home" aria-label="Return to Project Home">Return Home</a>
+
+  <script>
+    
+    const navLinks = document.querySelectorAll('nav a');
+    const sections = document.querySelectorAll('main section');
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const targetId = link.id.replace('nav-', '');
+
+        navLinks.forEach(nav => nav.classList.remove('active'));
+        sections.forEach(sec => sec.classList.remove('active'));
+
+        link.classList.add('active');
+        document.getElementById(targetId).classList.add('active');
+      });
+    });
+
+    function deleteItem(button) {
+      const container = button.closest('li') || button.closest('.event-item');
+      container.remove();
+    }
+
+    function editItem(button) {
+      const container = button.closest('li');
+      const contentSpan = container.querySelector('span.content');
+      if (!contentSpan) return;
+
+      const currentText = contentSpan.textContent;
+      const newText = prompt('Edit entry:', currentText);
+      if (newText !== null && newText.trim() !== '') {
+        contentSpan.textContent = newText.trim();
+      }
+    }
+
+    window.deleteItem = deleteItem;
+    window.editItem = editItem;
+
+   
+    const memberForm = document.getElementById('memberForm');
+    const memberList = document.getElementById('memberList');
+
+    memberForm.addEventListener('submit', e => {
+      e.preventDefault();
+
+      const name = memberForm.name.value.trim();
+      const email = memberForm.email.value.trim();
+      const phone = memberForm.phone.value.trim();
+
+      if (!name || !email || !phone) {
+        alert('Please fill all member details.');
+        return;
+      }
+
+      if (!validateEmail(email)) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+
+      const li = document.createElement('li');
+      li.innerHTML = `<span class="content">${name} | ${email} | ${phone}</span>
+        <div class="actions">
+          <button type="button" onclick="editItem(this)" aria-label="Edit member">Edit</button>
+          <button type="button" onclick="deleteItem(this)" aria-label="Delete member">Delete</button>
+        </div>`;
+      memberList.appendChild(li);
+
+      memberForm.reset();
+    });
+
+    
+    const attendanceForm = document.getElementById('attendanceForm');
+    const attendanceList = document.getElementById('attendanceList');
+
+    attendanceForm.addEventListener('submit', e => {
+      e.preventDefault();
+
+      const attendee = attendanceForm.attendee.value.trim();
+      const date = attendanceForm.date.value;
+
+      if (!attendee || !date) {
+        alert('Please fill all attendance details.');
+        return;
+      }
+
+      const li = document.createElement('li');
+      li.innerHTML = `<span class="content">${attendee} - ${date}</span>
+        <div class="actions">
+          <button type="button" onclick="editItem(this)" aria-label="Edit attendance">Edit</button>
+          <button type="button" onclick="deleteItem(this)" aria-label="Delete attendance">Delete</button>
+        </div>`;
+      attendanceList.appendChild(li);
+
+      attendanceForm.reset();
+    });
+
+    
+    const eventForm = document.getElementById('eventForm');
+    const eventList = document.getElementById('eventList');
+
+    eventForm.addEventListener('submit', e => {
+      e.preventDefault();
+
+      const title = eventForm.title.value.trim();
+      const eventDate = eventForm.eventDate.value;
+      const description = eventForm.description.value.trim();
+
+      if (!title || !eventDate || !description) {
+        alert('Please fill all event details.');
+        return;
+      }
+
+      const eventDiv = document.createElement('div');
+      eventDiv.classList.add('event-item');
+
+      eventDiv.innerHTML = `
+        <h3>${title}</h3>
+        <p><strong>Date:</strong> ${eventDate}</p>
+        <p>${description}</p>
+        <div class="actions">
+          <button type="button" onclick="editEvent(this)" aria-label="Edit event">Edit</button>
+          <button type="button" onclick="deleteItem(this)" aria-label="Delete event">Delete</button>
+        </div>`;
+
+      eventList.appendChild(eventDiv);
+
+      eventForm.reset();
+    });
+
+    function editEvent(button) {
+      const eventDiv = button.closest('.event-item');
+      if (!eventDiv) return;
+
+      const titleEl = eventDiv.querySelector('h3');
+      const dateEl = eventDiv.querySelector('p strong')?.parentElement; // whole date paragraph
+      const descriptionEl = eventDiv.querySelectorAll('p')[1]; // second paragraph
+
+      const newTitle = prompt('Edit Event Title:', titleEl.textContent);
+      if (newTitle === null || newTitle.trim() === '') return;
+
+      const newDate = prompt('Edit Event Date (YYYY-MM-DD):', dateEl.textContent.replace('Date:', '').trim());
+      if (newDate === null || newDate.trim() === '') return;
+
+      const newDescription = prompt('Edit Event Description:', descriptionEl.textContent);
+      if (newDescription === null || newDescription.trim() === '') return;
+
+      titleEl.textContent = newTitle.trim();
+      dateEl.innerHTML = `<strong>Date:</strong> ${newDate.trim()}`;
+      descriptionEl.textContent = newDescription.trim();
+    }
+
+  
+    function validateEmail(email) {
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(email.toLowerCase());
+    }
+  </script>
+</body>
+</html>

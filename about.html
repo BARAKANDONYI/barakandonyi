@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="Baraka Ogongi Ndonyi" />
+  <title>About Me | Baraka Ogongi Ndonyi</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fff;
+      color: #333;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body.dark-mode {
+      background-color: #121212;
+      color: #f5f5f5;
+    }
+
+    header {
+      background-color: #2c3e50;
+      padding: 1rem 0;
+    }
+
+    nav ul {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+    }
+
+    nav ul li {
+      margin: 0 15px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav ul li a:hover,
+    nav ul li a.active {
+      border-bottom: 2px solid #fff;
+    }
+
+    main {
+      padding: 2rem;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      max-width: 800px;
+      margin: 0 auto 1.5rem;
+      line-height: 1.7;
+    }
+
+    img.profile {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    button {
+      padding: 0.6rem 1.2rem;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    .feature-box {
+      background: linear-gradient(to bottom right, #f1f9ff, #d8efff);
+      border: 2px solid #b3dcf5;
+      border-radius: 12px;
+      padding: 2rem;
+      margin: 2rem auto;
+      max-width: 800px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .feature-box h2 {
+      color: #2c3e50;
+      margin-bottom: 1rem;
+    }
+
+    .feature-box img {
+      width: 100%;
+      max-width: 700px;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    .feature-box img:hover {
+      transform: scale(1.02);
+    }
+
+    .feature-box iframe {
+      width: 100%;
+      max-width: 700px;
+      height: 400px;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .feature-box iframe:hover {
+      transform: scale(1.02);
+    }
+
+    footer {
+      background-color: #2c3e50;
+      color: #ecf0f1;
+      text-align: center;
+      padding: 1rem 0;
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 600px) {
+      nav ul {
+        flex-direction: column;
+      }
+
+      nav ul li {
+        margin: 10px 0;
+      }
+
+      iframe {
+        height: 200px;
+      }
+    }
+  </style>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle("dark-mode");
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html" class="active">About Me</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="survey.html">Survey</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1>About Me</h1>
+    <img src="baraka.jpg" alt="Baraka Ogongi Ndonyi" class="profile" />
+    <p>
+      My name is <strong>Baraka Ogongi Ndonyi</strong>, and I’m a dedicated web developer with a passion for building fast, clean, and interactive web experiences. I enjoy turning ideas into real-world applications using HTML, CSS, JavaScript, and modern tools.
+    </p>
+    <p>
+      I’m constantly learning and experimenting with new technologies to improve my skills and stay current in the evolving tech world. I’ve developed several projects, including <strong> Church Record Management System </strong>and <strong>Healthcare AI tool</strong>  to enhance communication between patients and providers.
+    </p>
+    <p>
+      I believe that great websites are not just about code, they are about solving problems and creating meaningful experiences. When I’m not coding, I enjoy reading, solving logic puzzles, and exploring new tools in the developer space.
+    </p>
+
+    <section class="feature-box">
+      <h2>Clickable World Map</h2>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d15865.595617861956!2d35.8170869!3d-6.2110033499999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2stz!4v1747297056180!5m2!1sen!2stz" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <map name="worldmap">
+        <area shape="rect" coords="160,60,240,120" href="https://en.wikipedia.org/wiki/Europe" alt="Europe" target="_blank">
+        <area shape="rect" coords="80,120,160,200" href="https://en.wikipedia.org/wiki/Africa" alt="Africa" target="_blank">
+        <area shape="rect" coords="240,100,320,180" href="https://en.wikipedia.org/wiki/Asia" alt="Asia" target="_blank">
+      </map>
+    </section>
+
+  
+    <section class="feature-box">
+  <h2>My Favorite Video</h2>
+  <iframe width="560" height="315" 
+          src="https://www.youtube.com/embed/vme0tB88Bts" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+  </iframe>
+</section>
+
+
+    <button onclick="toggleTheme()">Toggle Dark/Light Mode</button>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Baraka Ogongi Ndonyi. All rights reserved.</p>
+  </footer>
+</body>
+</html>
